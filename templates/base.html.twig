@@ -1,89 +1,134 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
 
-        <!-- Utilisation d'un favicon externe (si tu as un fichier SVG, remplace le lien) -->
-        <link rel="icon" href="{{ asset('path/to/favicon.svg') }}" type="image/svg+xml">
+    <!-- Utilisation d'un favicon externe (si tu as un fichier SVG, remplace le lien) -->
+    <link
+      rel="icon"
+      href="{{ asset('path/to/favicon.svg') }}"
+      type="image/svg+xml"
+    />
 
-        {% block stylesheets %}
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-        {% endblock %}
+    {% block stylesheets %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    {% endblock %} {% block javascripts %} {% block importmap %}{{
+      importmap("app")
+    }}{% endblock %}
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+    {% endblock %}
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ path('app_home') }}">MySite</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <!-- Left side navigation links -->
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('app_home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('app_blog') }}">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
+            </li>
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-        {% endblock %}
-    </head>
-    <body>
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ path('app_home') }}">MySite</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <!-- Left side navigation links -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_home') }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_blog') }}">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
-                        </li>
-
-                        <!-- Right side navigation links for Admin -->
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li class="nav-item ms-auto">
-                                <a class="nav-link" href="{{ path('article_index') }}">Articles</a>
-                            </li>
-                            <li class="nav-item ms-auto">
-                                <a class="nav-link" href="{{ path('app_message_index') }}">Messages</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
-                            </li>
-                        {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                            <li class="nav-item ms-auto">
-                                <a class="nav-link" href="{{ path('article_index') }}">Articles</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item ms-auto">
-                                <a class="nav-link" href="{{ path('app_admin') }}">Admin</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        {% block body %}{% endblock %}
-
-        <!-- Footer -->
-        <div class="container">
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <p class="col-md-4 mb-0 text-body-secondary">© 2025 Company, Inc</p>
-
-                <!-- Si tu veux afficher un logo Bootstrap ou un autre, remplace-le ici -->
-                <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="Home">
-                    <img src="{{ asset('path/to/logo.png') }}" alt="Logo MySite" width="40" height="32">
-                </a>
-
-                <ul class="nav col-md-4 justify-content-end">
-                    <li class="nav-item">
-                        <a href="{{ path('app_mentionlegales') }}" class="nav-link px-2 text-body-secondary">Mentions légales</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path('app_politiquedeconfidentialite') }}" class="nav-link px-2 text-body-secondary">Politique de confidentialité</a>
-                    </li>
-                </ul>
-            </footer>
+            <!-- Right side navigation links for Admin -->
+            {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-item ms-auto">
+              <a class="nav-link" href="{{ path('article_index') }}"
+                >Articles</a
+              >
+            </li>
+            <li class="nav-item ms-auto">
+              <a class="nav-link" href="{{ path('app_message_index') }}"
+                >Messages</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+            </li>
+            {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <li class="nav-item ms-auto">
+              <a class="nav-link" href="{{ path('article_index') }}"
+                >Articles</a
+              >
+            </li>
+            {% else %}
+            <li class="nav-item ms-auto">
+              <a class="nav-link" href="{{ path('app_admin') }}">Admin</a>
+            </li>
+            {% endif %}
+          </ul>
         </div>
-    </body>
+      </div>
+    </nav>
+
+    {% block body %}{% endblock %}
+
+    <!-- Footer -->
+    <div class="container">
+      <footer
+        class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
+      >
+        <p class="col-md-4 mb-0 text-body-secondary">© 2025 Company, Inc</p>
+
+        <!-- Si tu veux afficher un logo Bootstrap ou un autre, remplace-le ici -->
+        <a
+          href="/"
+          class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+          aria-label="Home"
+        >
+          <img
+            src="{{ asset('images/logo.jpg') }}"
+            alt="Logo MySite"
+            width="40"
+            height="32"
+          />
+        </a>
+
+        <ul class="nav col-md-4 justify-content-end">
+          <li class="nav-item">
+            <a
+              href="{{ path('app_mentionlegales') }}"
+              class="nav-link px-2 text-body-secondary"
+              >Mentions légales</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="{{ path('app_politiquedeconfidentialite') }}"
+              class="nav-link px-2 text-body-secondary"
+              >Politique de confidentialité</a
+            >
+          </li>
+        </ul>
+      </footer>
+    </div>
+  </body>
 </html>

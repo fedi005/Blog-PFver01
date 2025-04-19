@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class ArticleType extends AbstractType
 {
@@ -20,6 +22,11 @@ class ArticleType extends AbstractType
             ->add('createdAt', DateType::class, [
                 'label' => 'Date de création',
                 'widget' => 'single_text',
+                'required' => false,
+            ])
+            ->add('imageFile', FileType::class, [
+                'label' => 'Image',
+                'mapped' => false,
                 'required' => false,
             ]);
     }
