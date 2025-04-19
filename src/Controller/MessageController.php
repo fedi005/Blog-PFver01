@@ -23,7 +23,7 @@ class MessageController extends AbstractController
         ]);
     }
 
-    #[Route('/messages/{id}', name: 'app_message_show')] // Affiche un message spécifique
+    #[Route('/messages/{id}', name: 'app_message_show', requirements: ['id' => '\d+'])] // Affiche un message spécifique
     public function show(Message $message): Response
     {
         return $this->render('message/show.html.twig', [
@@ -65,4 +65,16 @@ class MessageController extends AbstractController
             'form' => $form->createView(), // Passe le formulaire à la vue
         ]);
     }
+
+    #[Route('/messages/{id}/delete', name: 'app_message_delete', methods: ['POST'])] // Supprime un message spécifique
+    public function delete(Request $request, Message $message, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$message->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($message); // Supprime le message de la base
+            $entityManager->flush(); // Exécute la suppression
+        }
+
+        return $this->redirectToRoute('app_message_index'); // Redirige vers la liste des messages
+    }
+
 }

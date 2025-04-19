@@ -19,7 +19,7 @@ class MessageType extends AbstractType
             ->add('nom', TextType::class, ['label' => 'Votre Nom'])
             ->add('email', EmailType::class, ['label' => 'Votre Email'])
             ->add('sujet', TextType::class, ['label' => 'Sujet'])
-            ->add('message', TextareaType::class, ['label' => 'Message'])
+            ->add('contenu', TextareaType::class, ['label' => 'Message'])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer',
                 'attr' => ['class' => 'btn btn-primary']
