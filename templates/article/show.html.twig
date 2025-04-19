@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <h1>{{ article.titre }}</h1>
+    <p>{{ article.contenu }}</p>
+
+    {% if article.imageUrl %}
+        <img src="{{ asset('uploads/images/' ~ article.imageUrl) }}" alt="Image for {{ article.titre }}">
+        
+    {% endif %}
+
+    <a href="{{ path('article_index') }}">Retour à la liste</a>
+{% endblock %}

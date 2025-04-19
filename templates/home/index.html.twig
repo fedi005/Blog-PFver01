@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur le Blog Jeux Vidéo{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        background: #1e1e1e;
+        color: #f0f0f0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .blog-container {
+        max-width: 900px;
+        margin: 2em auto;
+        padding: 20px;
+        background: #2b2b2b;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    .blog-container h1 {
+        text-align: center;
+        color: #00ff99;
+        margin-bottom: 1em;
+    }
+
+    .blog-container p {
+        text-align: center;
+        font-size: 1.2em;
+        margin-bottom: 2em;
+    }
+
+    .articles-list h2 {
+        border-bottom: 2px solid #00ff99;
+        padding-bottom: 0.3em;
+        margin-bottom: 1em;
+        color: #00ff99;
+    }
+
+    .article-item {
+        background: #3a3a3a;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        transition: transform 0.3s, background 0.3s;
+    }
+
+    .article-item:hover {
+        transform: translateY(-5px);
+        background: #444;
+    }
+
+    .article-item h3 {
+        color: #ffd700;
+        margin-bottom: 10px;
+    }
+
+    .article-item p {
+        font-size: 1em;
+        line-height: 1.5;
+        color: #ccc;
+    }
+
+    .article-item a {
+        display: inline-block;
+        margin-top: 10px;
+        text-decoration: none;
+        background: #00ff99;
+        color: #222;
+        padding: 8px 14px;
+        border-radius: 8px;
+        transition: background 0.3s;
+    }
+
+    .article-item a:hover {
+        background: #00cc7a;
+    }
+</style>
+
+<div class="blog-container">
+    <h1>Bienvenue sur mon Blog ! 🎮</h1>
+
+    <p>Salut, je suis passionné de jeux vidéo depuis toujours. J’ai créé ce blog pour partager mes découvertes, coups de cœur et actualités autour des jeux vidéo avec vous.</p>
+
+    <div class="articles-list">
+        <h2>📰 Mes derniers articles</h2>
+        {% for article in articles %}
+            <div class="article-item">
+                <h3>{{ article.titre }}</h3>
+                <p>{{ article.contenu|slice(0, 150) ~ '...' }}</p>
+                <a href="#">Lire la suite</a>
+            </div>
+        {% else %}
+            <p>Aucun article n'a été publié pour le moment.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
