@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use App\Form\ArticleType; // Le formulaire pour ajouter/éditer un article
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,12 +23,12 @@ final class AdminController extends AbstractController
     #[Route('/admin', name: 'app_admin')]
     public function index(AuthorizationCheckerInterface $authChecker): Response
     {
-        // Vérifie si l'utilisateur est admin
+        
         if (!$authChecker->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('app_home'); // Redirige si l'utilisateur n'est pas admin
+            return $this->redirectToRoute('app_home'); 
         }
 
-        // Récupère tous les articles
+    
         $articles = $this->articleRepository->findAll();
 
         return $this->render('admin/index.html.twig', [

@@ -3,14 +3,31 @@
 {% block title %}Créer un article{% endblock %}
 
 {% block body %}
-<h1>Créer un article</h1>
+<div class="container mt-5">
+    <h1 class="mb-4">Créer un article</h1>
 
-{{ form_start(form) }}
-    {{ form_row(form.titre) }}
-    {{ form_row(form.contenu) }}
-    {{ form_row(form.imageFile) }}
-    <button class="btn">Enregistrer</button>
-{{ form_end(form) }}
+    {{ form_start(form) }}
+        <div class="mb-3">
+            {{ form_label(form.titre) }}
+            {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.titre) }}
+        </div>
 
-<a href="{{ path('article_index') }}">Retour à la liste</a>
+        <div class="mb-3">
+            {{ form_label(form.contenu) }}
+            {{ form_widget(form.contenu, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.contenu) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.imageFile) }}
+            {{ form_widget(form.imageFile, {'attr': {'class': 'form-control-file'}}) }}
+            {{ form_errors(form.imageFile) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('article_index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+</div>
 {% endblock %}

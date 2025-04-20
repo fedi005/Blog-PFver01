@@ -3,9 +3,18 @@
 {% block title %}New Message{% endblock %}
 
 {% block body %}
-    <h1>Create new Message</h1>
+    <h1 class="my-4">Create new Message</h1>
 
-    {{ include('message/_form.html.twig') }}
+    <div class="container">
+        {{ form_start(form) }}
+            <div class="mb-3">
+                {{ form_row(form) }}
+            </div>
+            <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
+    </div>
 
-    <a href="{{ path('app_message_index') }}">back to list</a>
+    <div class="mt-4">
+        <a href="{{ path('app_message_index') }}" class="btn btn-secondary">Back to list</a>
+    </div>
 {% endblock %}

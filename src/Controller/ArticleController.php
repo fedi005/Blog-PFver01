@@ -48,7 +48,7 @@ class ArticleController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // Log ou flash message
+                    
                 }
 
                 $article->setImageUrl($newFilename);
@@ -97,7 +97,7 @@ class ArticleController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // Log ou flash message
+                    
                 }
 
                 $article->setImageUrl($newFilename);

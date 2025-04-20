@@ -1,35 +1,40 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Le Blog de la Femme du Gérant{% endblock %}
-
-{% block body %}
+{% extends 'base.html.twig' %} {% block title %}Le Blog de la Femme du Gérant{%
+endblock %} {% block body %}
 <div class="container mt-4">
-    <h1 class="text-center mb-5">Le Blog de la Femme du Gérant</h1>
+  <h1 class="text-center mb-5">Le Blog de la Femme du Gérant</h1>
 
-    <div class="row">
-        {% for article in articles %}
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    {% if article.imageUrl %}
-                        <img src="{{ asset('uploads/' ~ article.imageUrl) }}" class="card-img-top" alt="{{ article.titre }}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ article.titre }}</h5>
-                        <p class="card-text">{{ article.contenu|raw }}</p>
-                    </div>
-                    <div class="card-footer text-muted small">
-                        Publié le : {{ article.createdAt ? article.createdAt|date('d/m/Y') : 'Date inconnue' }}
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <p>Aucun article rédigé pour le moment.</p>
-        {% endfor %}
+  <div class="row">
+    {% for article in articles %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        {% if article.imageUrl %} >
+        <img
+          src="{{ asset('uploads/images/' ~ article.imageUrl) }}"
+          class="card-img-top"
+          alt="{{ article.titre }}"
+        />
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ article.titre }}</h5>
+          <p class="card-text">{{ article.contenu | raw }}</p>
+        </div>
+        <div class="card-footer text-muted small">
+          Publié le :
+          {{ article.createdAt ? article.createdAt|date('d/m/Y') : 'Date inconnue' }}
+        </div>
+      </div>
     </div>
+    {% else %}
+    <p>Aucun article rédigé pour le moment.</p>
+    {% endfor %}
+  </div>
 
-    <footer class="text-center mt-5">
-        <p>© 2025 Company, Inc</p>
-        <p><a href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a></p>
-    </footer>
+  <footer class="text-center mt-5">
+    <p>© 2025 Company, Inc</p>
+    <p>
+      <a href="#">Mentions légales</a> |
+      <a href="#">Politique de confidentialité</a>
+    </p>
+  </footer>
 </div>
 {% endblock %}

@@ -1,99 +1,117 @@
-{% extends 'base.html.twig' %} {% block title %}Bienvenue sur le Blog Jeux
-Vidéo{% endblock %} {% block body %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Univers Jeux Vidéo 🎮{% endblock %}
+
+{% block body %}
 <style>
   body {
-    background: #1e1e1e;
-    color: #f0f0f0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #121212;
+    color: #e0e0e0;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
   }
 
   .blog-container {
-    max-width: 900px;
-    margin: 2em auto;
-    padding: 20px;
-    background: #2b2b2b;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    max-width: 960px;
+    margin: 3em auto;
+    padding: 30px;
+    background: #1e1e1e;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   }
 
   .blog-container h1 {
     text-align: center;
-    color: #00ff99;
-    margin-bottom: 1em;
+    color: #00ffd5;
+    font-size: 2.4em;
+    margin-bottom: 0.5em;
   }
 
   .blog-container p {
     text-align: center;
-    font-size: 1.2em;
-    margin-bottom: 2em;
+    font-size: 1.1em;
+    color: #b0b0b0;
+    margin-bottom: 2.5em;
   }
 
   .articles-list h2 {
-    border-bottom: 2px solid #00ff99;
-    padding-bottom: 0.3em;
-    margin-bottom: 1em;
-    color: #00ff99;
+    color: #00ffd5;
+    border-bottom: 2px dashed #00ffd5;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    font-size: 1.6em;
   }
 
   .article-item {
-    background: #3a3a3a;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    transition: transform 0.3s, background 0.3s;
+    background: #232323;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, background 0.3s ease;
   }
 
   .article-item:hover {
     transform: translateY(-5px);
-    background: #444;
+    background: #292929;
   }
 
   .article-item h3 {
-    color: #ffd700;
+    color: #ffe600;
     margin-bottom: 10px;
+    font-size: 1.4em;
   }
 
   .article-item p {
+    color: #c0c0c0;
+    line-height: 1.6;
     font-size: 1em;
-    line-height: 1.5;
-    color: #ccc;
   }
 
   .article-item a {
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 15px;
     text-decoration: none;
-    background: #00ff99;
-    color: #222;
-    padding: 8px 14px;
-    border-radius: 8px;
-    transition: background 0.3s;
+    background: linear-gradient(45deg, #00ffd5, #00bfff);
+    color: #121212;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
   }
 
   .article-item a:hover {
-    background: #00cc7a;
+    background: linear-gradient(45deg, #00bfff, #00ffd5);
+    color: #000;
+  }
+
+  .no-article {
+    color: #ff5050;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 20px;
   }
 </style>
 
 <div class="blog-container">
-  <h1>Bienvenue sur mon Blog ! 🎮</h1>
+  <h1>Bienvenue sur mon Blog Jeux Vidéo 🎮✨</h1>
 
   <p>
-    Salut, je suis passionné de jeux vidéo depuis toujours. J’ai créé ce blog
-    pour partager mes découvertes, coups de cœur et actualités autour des jeux
-    vidéo avec vous.
+    Passionné par l’univers gaming, je partage ici mes articles, tests et coups de cœur.  
+    Si tu es fan de jeux vidéo, tu es au bon endroit ! 🚀💡
   </p>
 
   <div class="articles-list">
-    <h2>📰 Mes derniers articles</h2>
+    <h2>📢 Les dernières actus :</h2>
     {% for article in articles %}
-    <div class="article-item">
-      <h3>{{ article.titre }}</h3>
-      <p>{{ article.contenu|slice(0, 150) ~ '...' }}</p>
-      <a href="{{ path('article_show', { id: article.id }) }}">Lire la suite</a>
-    </div>
+      <div class="article-item">
+        <h3>{{ article.titre }}</h3>
+        <p>{{ article.contenu|slice(0, 150) ~ '...' }}</p>
+        <a href="{{ path('article_show', { id: article.id }) }}">📖 Lire l'article complet</a>
+      </div>
     {% else %}
-    <p>Aucun article n'a été publié pour le moment.</p>
+      <p class="no-article">🚧 Aucun article dispo pour le moment. Reviens vite !</p>
     {% endfor %}
   </div>
 </div>

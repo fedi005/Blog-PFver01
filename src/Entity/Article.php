@@ -66,7 +66,7 @@ class Article
     {
         $this->imageFile = $imageFile;
         
-        // Automatically set the updatedAt field when an image is uploaded
+        
         if ($imageFile) {
             $this->updatedAt = new \DateTimeImmutable();
         }
@@ -93,7 +93,7 @@ class Article
         return $this->createdAt;
     }
 
-    // Automatically set createdAt when the article is created
+    
     public function setCreatedAt(?\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
@@ -105,14 +105,13 @@ class Article
         return $this->updatedAt;
     }
 
-    // Automatically set updatedAt when the article is updated
+   
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
         return $this;
     }
 
-    // Lifecycle callback to set createdAt when the article is created
     #[ORM\PrePersist]
     public function setCreationDate(): void
     {
@@ -121,7 +120,7 @@ class Article
         }
     }
 
-    // Lifecycle callback to set updatedAt when the article is updated
+    
     #[ORM\PreUpdate]
     public function setUpdateDate(): void
     {
